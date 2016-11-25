@@ -18,3 +18,18 @@ Lyric search project
 - output results // link to youtube video 	
 - Testing
 
+# Things to figure out
+- AZlyrics good for the website? 
+- figure out how to navigate the website for scraping
+	- www.azlyrics.com
+	- www.azlyrics.com/a.html // alphabetized by artist name 
+	- www.alyrics.com/a/aaliyah.html // artist page -- contains a list of all their songs in the data base
+	- www.azlyrics.com/lyrics/aaliyah/intro.html // the song page. the url changes format a bit  
+		- in html: ArtistName = "AALIYAH"; 
+		- SongName = "intro";
+		- lyrics are after a line of text in the html saying Usage of azlyrics.com content by any third-party lyrics provider is prohibited by our liscensing agreement. Sorry about that. 
+		- lyrics end then a line of html with " MxM banner" is after it. 
+
+# Ideas/thoughts
+- Use a simple search bar in a gui similar to the google search engine
+- Can we build this using a simple gui?   
