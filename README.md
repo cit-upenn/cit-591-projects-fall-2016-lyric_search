@@ -6,20 +6,22 @@ Lyric search project
 - How specifically will the user interact with your program?  i.e., command line input and output?  Java Swing gui?  Some other gui
 - Look into JSoup as a potential solution for scraping.
 
-
 # Project Plan
-- Scrape a lyric website to create a database of lyrics. Using a search, users can match a query to generate a list of songs that contain the lyrics. Potentially return Youtube links to those songs.
-- Use Java to scrape a lyric website. 
+- Scrape a lyric website to create a database of lyrics. Using a search, users can match a query to generate a list of songs that contain the lyrics
+. Return youtube links to the songs.
+- Use JSoup to scrape a lyric website. 
+	- Sameer tested it out and it doesn't seem too difficult to get scrape lyrics
 - Use Lucene for search algorithms http://lucene.apache.org/core/
+- Java serialization to store the data http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html
 	
 # Jobs breakdown:
-- scraping information 		
+- scraping information (JSoup)
+- convert stored data to Java serializable 		
 - user input and search (lucene)
 - output results // link to youtube video 	
 - Testing
 
 # Things to figure out
-- AZlyrics good for the website? 
 - figure out how to navigate the website for scraping
 	- www.azlyrics.com
 	- www.azlyrics.com/a.html // alphabetized by artist name 
@@ -31,5 +33,6 @@ Lyric search project
 		- lyrics end then a line of html with " MxM banner" is after it. 
 
 # Ideas/thoughts
-- Use a simple search bar in a gui similar to the google search engine
-- Can we build this using a simple gui?   
+- Decide if we want a gui or command line.
+- Can we build a simple search bar similar to google search using Java Swing?
+
