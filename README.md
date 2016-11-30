@@ -46,5 +46,6 @@ Document doc = new Document();
 doc.add(new TextField("content", "rubber baby buggy bumper", Field.Store.NO));
 doc.add(new StringField("author", "Joseph Conrad", Field.Store.NO));
 - look up fuzzy search and scoring
-
+- TFIDFSimilarity -- https://lucene.apache.org/core/6_3_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html 
+	- info on how lucene uses TFIDFSimilarity
 

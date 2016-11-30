@@ -38,7 +38,7 @@ public class HelloLucene {
     w.close();
 
     // 2. query
-    String querystr = args.length > 0 ? args[0] : "lucene";
+    String querystr = args.length > 0 ? args[0] : "lucee~ for dums~";	// ~ at end of each word for fuzzy search
 
     // the "title" arg specifies the default field to use
     // when no field is explicitly specified in the query.
