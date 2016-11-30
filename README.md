@@ -39,7 +39,12 @@ Lyric search project
 #JSoup
 
 #Lucene
--https://lucene.apache.org/core/6_3_0/core/overview-summary.html
+- https://lucene.apache.org/core/6_3_0/core/overview-summary.html
+- https://www.youtube.com/watch?v=fCK9U3L7c8U#t=811.516682
+	- textfield gets tokens and will be analyzed. stringfield will not get analyzed.
+Document doc = new Document();
+doc.add(new TextField("content", "rubber baby buggy bumper", Field.Store.NO));
+doc.add(new StringField("author", "Joseph Conrad", Field.Store.NO));
 
 
 
