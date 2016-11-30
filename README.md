@@ -45,6 +45,9 @@ Lyric search project
 Document doc = new Document();
 doc.add(new TextField("content", "rubber baby buggy bumper", Field.Store.NO));
 doc.add(new StringField("author", "Joseph Conrad", Field.Store.NO));
+- TextField is indexed and tokenized, without term vectors. 
+- StringField is indexed but not tokenized: the entire String value is indexed as a single token
+- FieldStore means that the original contents will be stored in the index. 
 - look up fuzzy search and scoring
 - TFIDFSimilarity -- https://lucene.apache.org/core/6_3_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html 
 	- info on how lucene uses TFIDFSimilarity
