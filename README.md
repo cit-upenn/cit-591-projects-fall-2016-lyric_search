@@ -36,5 +36,10 @@ Lyric search project
 - Decide if we want a gui or command line.
 - Can we build a simple search bar similar to google search using Java Swing?
 
+#JSoup
+
+#Lucene
+-https://lucene.apache.org/core/6_3_0/core/overview-summary.html
+
 
 
