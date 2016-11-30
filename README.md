@@ -45,6 +45,6 @@ Lyric search project
 Document doc = new Document();
 doc.add(new TextField("content", "rubber baby buggy bumper", Field.Store.NO));
 doc.add(new StringField("author", "Joseph Conrad", Field.Store.NO));
-
+- look up fuzzy search and scoring
 
 
