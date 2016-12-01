@@ -1,5 +1,17 @@
 import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.core.LowerCaseFilter;
+import org.apache.lucene.analysis.core.LowerCaseTokenizer;
+import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.core.StopFilter;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.en.PorterStemFilter;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.standard.StandardFilter;
+import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -8,8 +20,11 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -39,13 +54,14 @@ public class HelloLucene {
 		 */
 
 		SongData songData = new SongData(file);
-
+		
 		// 0. Specify the analyzer for tokenizing text.
 		// The same analyzer should be used for indexing and searching
 		/*
 		 * StandardAnalyzer analyzer = new StandardAnalyzer(stopset);
 		 */
 		StandardAnalyzer analyzer = new StandardAnalyzer();
+		
 		// 1. create the index
 		// to store index on disk use:
 		/*======================================
@@ -57,15 +73,16 @@ public class HelloLucene {
 		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();
 		IndexWriter iWriter = new IndexWriter(directory, config);
-
+		
+		
 		// need some while loop here to go through the file and create docs
-		for (int i = 0; i < songData.getDataSize(); i++) {
+		for (Integer key : songData.getKeySet()) {
 			Document doc = new Document();
-			String title = songData.getTitle(i);
-			String album = songData.getAlbum(i);
-			String artist = songData.getArtist(i);
-			String lyrics = songData.getLyrics(i);
-
+			String title = songData.getTitle(key);
+			String album = songData.getAlbum(key);
+			String artist = songData.getArtist(key);
+			String lyrics = songData.getLyrics(key);
+			System.out.println(songData.getLyrics(key));
 			// adds each field to the document
 			doc.add(new TextField("title", title, Field.Store.YES));
 			doc.add(new TextField("album", album, Field.Store.YES));
@@ -80,6 +97,7 @@ public class HelloLucene {
 		Scanner in = new Scanner(System.in);
 		boolean loop = true;
 		IndexReader reader = DirectoryReader.open(directory);
+		
 		while (loop) {
 			System.out.println("search some lyrics or (q)uit: ");
 			String input = in.nextLine();
@@ -96,8 +114,24 @@ public class HelloLucene {
 			String querystr = args.length > 0 ? args[0] : input;
 			// the "title" arg specifies the default field to use
 			// when no field is explicitly specified in the query.
+		    /*
+		     * test code for stemmming using tokenstreams?
+		     */
+			TokenStream tokenstream = analyzer.tokenStream("lyrics", querystr);
+		    tokenstream = new LowerCaseFilter(tokenstream);
+		    tokenstream = new StopFilter(tokenstream, StopAnalyzer.ENGLISH_STOP_WORDS_SET);
+		    tokenstream = new PorterStemFilter(tokenstream);
+		    OffsetAttribute offsetAttribute = tokenstream.addAttribute(OffsetAttribute.class);
+		    CharTermAttribute charTermAttribute = tokenstream.addAttribute(CharTermAttribute.class);
+		    
+		    tokenstream.reset();
+		    while (tokenstream.incrementToken()) {
+		    	querystr = charTermAttribute.toString();
+		    }
+		    tokenstream.end();
+		    tokenstream.close();
+		    
 			Query q = new QueryParser("lyrics", analyzer).parse(querystr);
-
 			// 3. search
 			int hitsPerPage = 5;
 			// copied the reader to outside the loop
