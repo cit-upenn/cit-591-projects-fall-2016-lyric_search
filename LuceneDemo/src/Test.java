@@ -27,7 +27,7 @@ import java.io.IOException;
 public class Test {
 
 	public static void main(String[] args) throws IOException, ParseException {
-
+		
 		StandardAnalyzer analyzer = new StandardAnalyzer();
 
 		// Store the index in memory:
@@ -40,6 +40,7 @@ public class Test {
 		String text = "This is the text to be indexed.";
 		doc.add(new TextField("content", text, Field.Store.YES));
 		iwriter.addDocument(doc);
+		
 		iwriter.close();
 
 		// Now search the index:
