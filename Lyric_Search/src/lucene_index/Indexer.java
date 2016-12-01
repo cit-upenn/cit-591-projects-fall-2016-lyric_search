@@ -1,3 +1,4 @@
+package lucene_index;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,7 +28,7 @@ public class Indexer {
 /*
  * choose to make index in ram or store in a directory
  */
-		Path docDir = Paths.get("index");
+		Path docDir = Paths.get("Song_Index");
 		Directory directory = FSDirectory.open(docDir);
 //		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();

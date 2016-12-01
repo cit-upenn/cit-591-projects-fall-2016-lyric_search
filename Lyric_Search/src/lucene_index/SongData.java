@@ -1,3 +1,4 @@
+package lucene_index;
 import java.util.HashMap;
 import java.util.Set;
 /**

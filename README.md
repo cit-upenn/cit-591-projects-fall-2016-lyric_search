@@ -51,4 +51,6 @@ doc.add(new StringField("author", "Joseph Conrad", Field.Store.NO));
 - look up fuzzy search and scoring
 - TFIDFSimilarity -- https://lucene.apache.org/core/6_3_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html 
 	- info on how lucene uses TFIDFSimilarity
-
+- AutoSuggestion:
+	-http://lucene.apache.org/core/6_3_0/suggest/org/apache/lucene/search/suggest/analyzing/AnalyzingSuggester.html
+	-http://puneetkhanal.blogspot.com/2013/04/simple-auto-suggester-using-lucene-41.html

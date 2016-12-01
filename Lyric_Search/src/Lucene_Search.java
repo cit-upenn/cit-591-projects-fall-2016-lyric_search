@@ -22,7 +22,7 @@ public class Lucene_Search {
 		StandardAnalyzer analyzer = new StandardAnalyzer();
 		Scanner in = new Scanner(System.in);
 		boolean loop = true;
-		Path docDir = Paths.get("index");
+		Path docDir = Paths.get("Song_Index");
 		Directory directory = FSDirectory.open(docDir);
 		IndexReader reader = DirectoryReader.open(directory);
 		IndexSearcher searcher = new IndexSearcher(reader);
