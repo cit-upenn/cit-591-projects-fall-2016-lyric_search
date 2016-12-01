@@ -43,6 +43,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * This class is for testing lucene functionality by creating a demo
+ * @author jon
+ *
+ */
 public class HelloLucene {
 	public static void main(String[] args) throws IOException, ParseException {
 
@@ -75,11 +80,11 @@ public class HelloLucene {
 		 * Path docDir = Paths.get("index"); Directory directory =
 		 * FSDirectory.open(docDir);
 		 */
-		// Path docDir = Paths.get("index"); Directory directory =
+		// Path docDir = Paths.get("demo_index"); Directory directory =
 		// FSDirectory.open(docDir);
 		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();
-		IndexWriter iWriter = new IndexWriter(directory, config);
+		IndexWriter indexWriter = new IndexWriter(directory, config);
 
 		// need some while loop here to go through the file and create docs
 		for (Integer key : songData.getKeySet()) {
@@ -95,16 +100,16 @@ public class HelloLucene {
 			doc.add(new TextField("artist", artist, Field.Store.YES));
 			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
 			// write the document to the index
-			iWriter.addDocument(doc);
+			indexWriter.addDocument(doc);
 		}
 
-		iWriter.close();
+		indexWriter.close();
 
 		Scanner in = new Scanner(System.in);
 		boolean loop = true;
 		/*
 		 * to read from a pre-indexed file directly Path docDir =
-		 * Paths.get("index"); Directory directory = FSDirectory.open(docDir);
+		 * Paths.get("demo_index"); Directory directory = FSDirectory.open(docDir);
 		 * StandardAnalyzer analyzer = new StandardAnalyzer();
 		 */
 
