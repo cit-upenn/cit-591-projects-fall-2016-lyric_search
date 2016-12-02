@@ -20,30 +20,16 @@ public class YoutubeAPICaller {
 //	public void setSongName(String song) {
 //		this.songName = song;
 //	}
-
-	
-//	public ArrayList<String> extractIdsFromResponse(String response) {
-//		ArrayList<String> ids = new ArrayList<String>();
-//		JSONObject obj = new JSONObject(response);
-//		JSONArray theResults = obj.getJSONArray("results");
-//		
-//		for (int i = 0; i < theResults.length(); i++)
-//		{
-//		    JSONObject single = theResults.getJSONObject(i);
-//		    ids.add("" + single.getInt("id"));
-//		}
-//		return ids;
-//	}
 	
 	public HashMap <String, String> extractIdsFromResponse(String response) {
 		HashMap <String, String> results = new HashMap <String, String>();
 		JSONObject obj = new JSONObject(response);
-		JSONArray theResults = obj.getJSONArray("totalResults");
+		JSONArray theResults = obj.getJSONArray("items");
 		
 		for (int i = 0; i < theResults.length(); i++)
 		{
 		    JSONObject single = theResults.getJSONObject(i);
-		    results.put(single.getString("title"), single.getString("videoId"));
+		    results.put(single.getJSONObject("snippet").getString("title"), single.getJSONObject("id").getString("videoId"));
 		}
 		
 		return results;

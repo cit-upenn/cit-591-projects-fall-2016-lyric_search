@@ -42,7 +42,7 @@ public class GUI extends Application {
 			scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			grid.add(scenetitle, 1, 0, 1, 1);
 			
-			grid.setGridLinesVisible(true);
+//			grid.setGridLinesVisible(true);
 			
 			Label search = new Label("Enter Lyrics:");
 			grid.add(search, 0, 2);
@@ -75,7 +75,7 @@ public class GUI extends Application {
 			scenetitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			grid2.add(scenetitle2, 1, 0, 1, 1);
 			
-			grid2.setGridLinesVisible(true);
+//			grid2.setGridLinesVisible(true);
 			
 			Label song = new Label("Song:");
 			grid2.add(song, 0, 2);
