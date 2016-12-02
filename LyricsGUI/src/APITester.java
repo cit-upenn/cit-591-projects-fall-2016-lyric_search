@@ -25,11 +25,11 @@ public class APITester {
 		HashMap <String, String> ID = yt.extractIdsFromResponse(searchResponse);
 		String videoId = "";
 		for(String element : ID.keySet()){
-//			if(element.contains(searchInputNoSpace)){
+			if(element.toLowerCase().contains(searchInputNoSpace)){
 				videoId = ID.get(element);
 				System.out.println(videoId);
 				break;
-//			}
+			}
 		}
 		videoLink = YoutubeURL + videoId;
 		System.out.println(videoLink);
