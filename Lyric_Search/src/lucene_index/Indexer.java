@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
@@ -12,7 +11,6 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.RAMDirectory;
 
 /**
  * This class creates a searchable index
@@ -48,7 +46,7 @@ public class Indexer {
 			doc.add(new TextField("title", title, Field.Store.YES));
 			doc.add(new TextField("album", album, Field.Store.YES));
 			doc.add(new TextField("artist", artist, Field.Store.YES));
-			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
+			doc.add(new TextField("lyrics", lyrics, Field.Store.YES));
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
