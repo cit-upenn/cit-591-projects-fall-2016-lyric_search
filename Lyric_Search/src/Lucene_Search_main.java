@@ -40,7 +40,7 @@ public class Lucene_Search_main {
 			}
 			// create query
 			// can use~ after each term for fuzzy search
-			String querystr = args.length > 0 ? args[0] : input;
+			String querystr = input;
 			// first field specifies the default field to use
 			// when no field is explicitly specified in the query.
 			Query q = new QueryParser("lyrics", analyzer).parse(querystr);
