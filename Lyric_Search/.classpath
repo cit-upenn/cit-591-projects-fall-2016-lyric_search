@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/jon/Development/EclipseWorkspace/HomeworkSix/cit-591-projects-fall-2016-lyric_search/Lyric_Search/lib/lucene-queryparser-6.3.0.jar"/>
-	<classpathentry kind="lib" path="/home/jon/Development/EclipseWorkspace/HomeworkSix/cit-591-projects-fall-2016-lyric_search/Lyric_Search/lib/lucene-core-6.3.0.jar"/>
-	<classpathentry kind="lib" path="/home/jon/Development/EclipseWorkspace/HomeworkSix/cit-591-projects-fall-2016-lyric_search/Lyric_Search/lib/json-20160810.jar"/>
+	<classpathentry kind="lib" path="lib/json-20160810.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-6.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-queryparser-6.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
