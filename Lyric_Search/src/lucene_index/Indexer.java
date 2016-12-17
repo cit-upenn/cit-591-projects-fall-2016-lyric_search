@@ -15,7 +15,7 @@ import org.apache.lucene.store.FSDirectory;
 /**
  * This class creates a searchable index
  * 
- * @author jon
+ * @author Jonathan Huang, Sameer Kale, Saurav Sharma 
  *
  */
 public class Indexer {
