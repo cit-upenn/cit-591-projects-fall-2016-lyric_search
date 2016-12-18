@@ -21,7 +21,10 @@ public class SongData {
 		album = new HashMap<>();
 		title = new HashMap<>();
 		lyrics = new HashMap<>();
+		System.out.println("lines in file: " + file.getFile().size());
 		generateData(file);
+		System.out.println("lines in file: " + file.getFile().size());
+		System.out.println("artist hashmap size: " + artist.size());
 	}
 
 	/**
@@ -32,7 +35,7 @@ public class SongData {
 	private void generateData(FileReader file) {
 		// think about how to deal with this if the line is an empty line?
 		// what about if the file is not formatted properly?
-		int marker = 0;
+//		int marker = 0;
 		for (int i = 0; i < file.getFile().size(); i++) {
 			if (file.getFile().get(i).contains("|")) {
 				String[] temp = file.getFile().get(i).split("\\|");
@@ -40,13 +43,13 @@ public class SongData {
 				album.put(i, temp[1].trim());
 				title.put(i, temp[2].trim());
 				lyrics.put(i, temp[3].trim());
-				marker = i;
-			} else if (!file.getFile().get(i).contains("**")) {
-				if (file.getFile().get(i).equals("")) {
-					lyrics.put(marker, lyrics.get(marker) + "\n");
-				} else {
-					lyrics.put(marker, lyrics.get(marker) + (file.getFile().get(i)) + "\n");
-				}
+//				marker = i;
+//			} else if (!file.getFile().get(i).contains("**")) {
+//				if (file.getFile().get(i).equals("")) {
+//					lyrics.put(marker, lyrics.get(marker) + "\n");
+//				} else {
+//					lyrics.put(marker, lyrics.get(marker) + (file.getFile().get(i)) + "\n");
+//				}
 			}
 		}
 	}

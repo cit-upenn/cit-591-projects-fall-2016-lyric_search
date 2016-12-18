@@ -22,29 +22,27 @@ public class SongData {
 	private void generateData(FileReader file) {
 		// think about how to deal with this if the line is an empty line?
 		// what about if the file is not formatted properly?
-		int marker = 0;
 
 		for (int i = 0; i < file.getFile().size(); i++) {
 			if (file.getFile().get(i).contains("|")) {
 				String[] temp = file.getFile().get(i).split("\\|");
 				/*
-				 * code for old way of formatting the lyrics
-				 * if it's an empty line skip this line if (temp.length == 1) {
-				 * continue; }
+				 * code for old way of formatting the lyrics if it's an empty
+				 * line skip this line if (temp.length == 1) { continue; }
 				 * 
 				 */
 				artist.put(i, temp[0].trim());
+				System.out.println("artist: " + artist.get(i));
 				album.put(i, temp[1].trim());
+				System.out.println("album: " + album.get(i));
 				title.put(i, temp[2].trim());
+				System.out.println("title: " + title.get(i));
+				
 				lyrics.put(i, temp[3].trim());
-				marker = i;
-			} else if (!file.getFile().get(i).contains("**")) {
-				if (file.getFile().get(i).equals("")) {
-					lyrics.put(marker, lyrics.get(marker) + "\n");
-				} else {
-					lyrics.put(marker, lyrics.get(marker) + (file.getFile().get(i)) + "\n");
-				}
+				System.out.println("lyrics: " + lyrics.get(i));
+				
 			}
+			System.out.println("TEST: " + title.get(18433));
 		}
 	}
 

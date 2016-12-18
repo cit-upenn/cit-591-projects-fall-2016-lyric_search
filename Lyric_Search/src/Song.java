@@ -1,6 +1,6 @@
 /** 
  * This class acts a a container for transferring song data
- * @author jon
+ * @author Jonathan Huang, Sameer Kale, Saurav Sharma
  *
  */
 public class Song {

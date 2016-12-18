@@ -51,12 +51,16 @@ import java.util.Scanner;
 public class HelloLucene {
 	public static void main(String[] args) throws IOException, ParseException {
 
-		FileReader file = new FileReader("song_list.txt");
+//		FileReader file = new FileReader("song_list.txt");
+//		FileReader file = new FileReader("demo_lyrics_10k.txt");
+//		FileReader file = new FileReader("lyrics-20k.txt");
+		FileReader file = new FileReader("lyrics100.txt");
+		
 		/*
 		 * ============================= stop list with this code stop list code
 		 * FileReader stoplist = new FileReader("stop_list.txt");
 		 * 
-		 * CharArraySet stopset = new CharArraySet(stoplist.getFile().size(),
+		 * CharArraySet stopset = snew CharArraySet(stoplist.getFile().size(),
 		 * true); for (String words : stoplist.getFile()) { stopset.add(words);
 		 * }
 		 */

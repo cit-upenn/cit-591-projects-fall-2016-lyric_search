@@ -41,12 +41,14 @@ public class Lucene_Search_main {
 			// create query
 			// can use~ after each term for fuzzy search
 			String querystr = input;
+//			String querystr = args.length > 0 ? args[0] : input;
 			
 			System.out.println(querystr);
 			
 			// first field specifies the default field to use
 			// when no field is explicitly specified in the query.
 			Query q = new QueryParser("lyrics", analyzer).parse(querystr);
+//			Query q = new QueryParser("title", analyzer).parse(querystr);
 
 			// search
 			int hitsPerPage = 5;
@@ -64,7 +66,7 @@ public class Lucene_Search_main {
 			for (int i = 0; i < hits.length; ++i) {
 				int docId = hits[i].doc;
 				Document d = searcher.doc(docId);
-				System.out.println((i + 1) + ". " + d.get("artist") + "\t" + d.get("title") + "\n");
+				System.out.println((i + 1) + ". " + d.get("artist") + "\t" + d.get("title") + "\t" + d.get("lyrics") + "\n");
 			}
 			System.out.println();
 		}

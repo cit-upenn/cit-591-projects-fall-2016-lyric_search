@@ -1,4 +1,5 @@
 package lucene_index;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,25 +16,37 @@ import org.apache.lucene.store.FSDirectory;
 /**
  * This class creates a searchable index
  * 
- * @author jon
+ * @author Jonathan Huang, Sameer Kale, Saurav Sharma 
  *
  */
 public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
-		FileReader file = new FileReader("song_list.txt");
+//		FileReader file = new FileReader("song_list.txt");
+//		FileReader file = new FileReader("demo_lyrics_10k.txt");
+//		FileReader file = new FileReader("lyrics1000.txt");
+		FileReader file = new FileReader("lyrics10000new.txt");
+		
 		SongData songData = new SongData(file);
 //		StandardAnalyzer analyzer = new StandardAnalyzer();
 /*
  * choose to make index in ram or store in a directory
  */
-		Path docDir = Paths.get("Song_Index");
+		Path docDir = Paths.get("Song_Index"); 
 		Directory directory = FSDirectory.open(docDir);
+		File dir = new File("Song_Index");
+		// deletes all files in the directory so each indexing is a fresh start
+		for(File files: dir .listFiles()) { 
+		    if (!files.isDirectory()) 
+		        files.delete();
+		}
 //		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();
 		IndexWriter indexWriter = new IndexWriter(directory, config);
-		// makes sure the index is empty before creating a new index
+		// makes sure the index has no docs before creating a new index
 		// prevents duplicates in index
 		indexWriter.deleteAll();
+		indexWriter.commit();
+		
 		// loop through song data to create the docs
 		System.out.println("indexing...");
 		for (Integer key : songData.getKeySet()) {
@@ -50,6 +63,7 @@ public class Indexer {
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
+		System.out.println(indexWriter.numDocs());
 		
 		indexWriter.close();
 		System.out.println("Indexing Complete!");

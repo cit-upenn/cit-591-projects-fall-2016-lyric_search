@@ -20,7 +20,7 @@ import org.apache.lucene.store.FSDirectory;
 /**
  * This is a search class that has all of the searching logic
  * 
- * @author jon
+ * @author Jonathan Huang, Sameer Kale, Saurav Sharma
  *
  */
 public class Lucene_Search {
