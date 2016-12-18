@@ -23,7 +23,11 @@ public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
 		FileReader file = new FileReader("song_list.txt");
 //		FileReader file = new FileReader("demo_lyrics_10k.txt");
+<<<<<<< HEAD
 //		FileReader file = new FileReader("lyrics.txt");
+=======
+		FileReader file = new FileReader("lyrics.txt");
+>>>>>>> 3fe28a2d702ad12b6656dd9ce0d65d6f27383dbf
 //		FileReader file = new FileReader("lyrics10000new.txt");
 		
 		SongData songData = new SongData(file);
