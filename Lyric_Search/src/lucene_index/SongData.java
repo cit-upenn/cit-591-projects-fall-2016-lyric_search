@@ -21,7 +21,10 @@ public class SongData {
 		album = new HashMap<>();
 		title = new HashMap<>();
 		lyrics = new HashMap<>();
+		System.out.println("lines in file: " + file.getFile().size());
 		generateData(file);
+		System.out.println("lines in file: " + file.getFile().size());
+		System.out.println("artist hashmap size: " + artist.size());
 	}
 
 	/**
