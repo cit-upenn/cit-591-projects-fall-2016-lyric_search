@@ -11,18 +11,18 @@ import org.json.JSONObject;
 public class YoutubeAPICaller {
 	private final static String API_BASE = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
 	private final static String MY_KEY = "AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
-	private final static String YoutubeURL = "https://www.youtube.com/watch?v=";
+	private final static String YoutubeURL = "https://www.youtube.com/embed/";
 	private String videoLink;
 
-	public String getYoutubeID (String songTitle) throws Exception{
-		String searchUrl = buildUrl(songTitle);
+	public String getYoutubeID (String songTitle, String songArtist) throws Exception{
+		String artistAndSong = songArtist + " " + songTitle;
+		String searchUrl = buildUrl(artistAndSong);
 		String searchResponse = doApiCall(searchUrl);
 		HashMap <String, String> ID = extractIdsFromResponse(searchResponse);
 		String videoId = "";
 		for(String element : ID.keySet()){
-			if(element.toLowerCase().contains(songTitle)){
+			if(element.toLowerCase().contains(songTitle.toLowerCase())){
 				videoId = ID.get(element);
-				System.out.println(videoId);
 				break;
 			}
 		}
@@ -31,8 +31,9 @@ public class YoutubeAPICaller {
 	}
 
 	public String buildUrl(String title) {
-		String songNameNoSpaces = title.replaceAll(" ", "\\+");
-		StringBuilder url = new StringBuilder(API_BASE + songNameNoSpaces + "&type=video&key=" + MY_KEY);
+		String searchTermNoSpaces = title.replaceAll(" ", "\\+");
+		System.out.println(searchTermNoSpaces);
+		StringBuilder url = new StringBuilder(API_BASE + searchTermNoSpaces + "&type=video&key=" + MY_KEY);
 		return url.toString();
 	}
 
@@ -42,7 +43,6 @@ public class YoutubeAPICaller {
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-		// optional default is GET
 		con.setRequestMethod("GET");
 
 		BufferedReader in = new BufferedReader(
