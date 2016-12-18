@@ -183,7 +183,7 @@ public class Lyrics {
 			Lyrics lyrics = new Lyrics();
 			
 			// note: must specify which songs to get (range)
-			lyrics.getAllSongs(500, 510);
+			lyrics.getAllSongs(1, 10);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
