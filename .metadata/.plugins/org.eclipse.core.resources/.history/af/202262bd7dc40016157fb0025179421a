@@ -1,0 +1,116 @@
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.json.JSONObject;
+
+public class Lyrics {
+
+	private final static String USER_AGENT = "something";
+	private final static String MY_KEY = "Bearer FEelQry7txfJ1HkTdV8VYwmPEJB9aS11O2NeWEuAHoNcpR61WCYN27nMjVn7ZF6X"; 
+	private final static String API_BASE = "https://api.genius.com/songs/";
+
+	// given url for lyrics, this functions gets html page and gets lyrics using Jsoup api.
+	static String getLyrics(String url) {
+		Document doc;
+		String lyrics = "";
+		try {
+			Connection con = Jsoup.connect(url);
+			con.header("User-Agent", "something");
+			doc = con.get();
+			Elements lyricsElement = doc.select(".song_body-lyrics p");
+			lyrics = lyricsElement.text();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lyrics;
+	}
+
+	// get song using Genius API given the number of song
+	// returns artistName + "|" + albumName + "|" + songTitle + "|" + lyrics
+	static String getSong(int num) throws Exception {
+		URL url;
+		String output = "";
+
+		String surl = API_BASE + num;
+
+		url = new URL(surl);
+
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+		// optional default is GET
+		con.setRequestMethod("GET");
+
+		// add request header
+		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("Authorization", MY_KEY);
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), 
+				Charset.forName("UTF-8")));
+		String inputLine;
+		StringBuffer serverResponse = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			serverResponse.append(inputLine);
+		}
+		in.close();
+
+		JSONObject obj = new JSONObject(serverResponse.toString());
+
+		String songTitle = obj.getJSONObject("response").getJSONObject("song").getString("title");
+		String lyricsURL = obj.getJSONObject("response").getJSONObject("song").getString("url");
+		String albumName = obj.getJSONObject("response").getJSONObject("song").getJSONObject("album").getString("name");
+		String artistName = obj.getJSONObject("response").getJSONObject("song").getJSONObject("album")
+				.getJSONObject("artist").getString("name");
+
+		String lyrics = getLyrics(lyricsURL);
+
+		output = artistName + "|" + albumName + "|" + songTitle + "|" + lyrics + "\n** \n";
+		//output = artistName + "|" + albumName + "|" + songTitle + "|" + lyrics + "** \n \n";
+
+		return output;
+
+	}
+
+	public static void main(String[] args) {
+
+		String songData;
+
+		PrintWriter out = null;		
+		try {
+			out = new PrintWriter("lyrics.txt");
+
+			// there are thousands of songs; change 5 to any number of songs
+			for (int num = 9995; num <= 10001; num++) {  
+				System.out.println(num);
+				try {
+					songData = getSong(num);
+					out.write(songData);
+					System.out.println(songData);
+				} catch (Exception e) {
+					System.out.println("Song " + num + " not found. " + e.getMessage());
+					System.out.println();
+					System.out.println();
+				} 
+			}
+
+			out.close();
+
+			System.out.println("Scraping complete!");
+
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+	}
+}
