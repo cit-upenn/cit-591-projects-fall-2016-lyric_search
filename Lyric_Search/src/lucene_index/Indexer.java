@@ -21,10 +21,10 @@ import org.apache.lucene.store.FSDirectory;
  */
 public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
-//		FileReader file = new FileReader("song_list.txt");
+		FileReader file = new FileReader("song_list.txt");
 //		FileReader file = new FileReader("demo_lyrics_10k.txt");
 //		FileReader file = new FileReader("lyrics.txt");
-		FileReader file = new FileReader("lyrics10000new.txt");
+//		FileReader file = new FileReader("lyrics10000new.txt");
 		
 		SongData songData = new SongData(file);
 //		StandardAnalyzer analyzer = new StandardAnalyzer();

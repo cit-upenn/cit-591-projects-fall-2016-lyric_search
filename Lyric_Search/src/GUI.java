@@ -76,10 +76,8 @@ public class GUI extends Application {
 				try {
 					ButtonClicked(e);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			});
@@ -197,7 +195,7 @@ public class GUI extends Application {
 			albumTitle.setText(container.get(0).getAlbum());
 			
 			try {
-				videoID = yt.getYoutubeID(container.get(2).getTitle());
+				videoID = yt.getYoutubeID(container.get(4).getTitle());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			} 
