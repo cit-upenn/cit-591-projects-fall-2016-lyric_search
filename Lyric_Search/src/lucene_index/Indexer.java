@@ -20,7 +20,11 @@ import org.apache.lucene.store.FSDirectory;
  */
 public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
-		FileReader file = new FileReader("song_list.txt");
+//		FileReader file = new FileReader("song_list.txt");
+//		FileReader file = new FileReader("lyrics100.txt");
+		FileReader file = new FileReader("lyrics1000.txt");
+//		FileReader file = new FileReader("demo_lyrics_10k.txt");
+		
 		SongData songData = new SongData(file);
 //		StandardAnalyzer analyzer = new StandardAnalyzer();
 /*
@@ -46,7 +50,7 @@ public class Indexer {
 			doc.add(new TextField("title", title, Field.Store.YES));
 			doc.add(new TextField("album", album, Field.Store.YES));
 			doc.add(new TextField("artist", artist, Field.Store.YES));
-			doc.add(new TextField("lyrics", lyrics, Field.Store.YES));
+			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
