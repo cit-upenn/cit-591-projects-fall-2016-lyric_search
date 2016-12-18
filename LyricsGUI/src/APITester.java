@@ -17,6 +17,7 @@ public class APITester {
 		String videoLink = "";
 		String searchInput = "where+it's+at";
 		String searchInputNoSpace = searchInput.replaceAll("\\+", " ");
+		System.out.println(searchInputNoSpace);
 //		System.out.println(searchInputNoSpace);
 		String searchUrl = yt.buildUrl(searchInput);
 		String searchResponse = yt.doApiCall(searchUrl);

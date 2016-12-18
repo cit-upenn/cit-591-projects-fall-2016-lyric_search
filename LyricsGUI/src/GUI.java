@@ -128,5 +128,6 @@ public class GUI extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+//		Lucene_Search() search = new Lucene_Search();
 	}
 }

@@ -5,7 +5,7 @@
 }
 
 .label {
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
@@ -17,6 +17,14 @@
    -fx-fill: #818181;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
+
+#result-text {
+   -fx-font-size: 12px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0, 0, 255, 0.9) , 6, 0.0 , 0 , 2 );
+}
+
 #actiontarget {
   -fx-fill: FIREBRICK;
   -fx-font-weight: bold;
