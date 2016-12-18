@@ -5,12 +5,15 @@ import org.apache.lucene.queryparser.classic.ParseException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -22,13 +25,21 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
-	Stage thestage;
-	Scene scene1; 
-	Scene scene2;
-	Button btn1;
-	Button btn2;
-	TextField searchBar;
-	static String lyrics;
+	private Stage thestage;
+	private Scene scene1; 
+	private Scene scene2;
+	private Button btn1;
+	private Button btn2;
+	private TextField searchBar;
+	private String lyrics;
+	private HashMap<Integer, Song> container;
+	private Text songTitle;
+	private Text artistTitle;
+	private Text albumTitle;
+	private Lucene_Search search;
+	private YoutubeAPICaller yt;
+	private String videoID;
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -61,7 +72,19 @@ public class GUI extends Application {
 			hbBtn.getChildren().add(btn1);
 			grid.add(hbBtn, 6, 3);
 			
-			btn1.setOnAction(e-> ButtonClicked(e));
+			btn1.setOnAction(e-> {
+				try {
+					ButtonClicked(e);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
+			
+			searchBar.setOnKeyPressed(keyEvent -> handle(keyEvent));
 			
 			root.setTop(grid);
 			
@@ -80,25 +103,31 @@ public class GUI extends Application {
 			sceneTitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			grid2.add(sceneTitle2, 1, 0, 1, 1);
 			
-			grid2.setGridLinesVisible(true);
+//			grid2.setGridLinesVisible(true);
 			
 			Label song = new Label("Song:");
 			grid2.add(song, 0, 2);
 			
-			Text songTitle = new Text("Song Name");
+			songTitle = new Text("");
 			grid2.add(songTitle, 1, 2);
+			songTitle.setId("result-text");
+//			songTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			
 			Label artist = new Label("Artist:");
 			grid2.add(artist, 0, 3);
 			
-			Text artistTitle = new Text("Artist Name");
+			artistTitle = new Text("");
 			grid2.add(artistTitle, 1, 3);
+			artistTitle.setId("result-text");
+//			artistTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			
 			Label album = new Label("Album:");
 			grid2.add(album, 0, 4);
 			
-			Text albumTitle = new Text("Album Name");
+			albumTitle = new Text("");
 			grid2.add(albumTitle, 1, 4);
+			albumTitle.setId("result-text");
+//			albumTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			
 			btn2 = new Button("Return");
 			HBox hbBtn2 = new HBox(10);
@@ -106,13 +135,20 @@ public class GUI extends Application {
 			hbBtn2.getChildren().add(btn2);
 			grid2.add(hbBtn2, 6, 5);
 			
-			btn2.setOnAction(e-> ButtonClicked(e));
+			btn2.setOnAction(e-> {
+				try {
+					ButtonClicked(e);
+				} catch (IOException | ParseException e1) {
+					e1.printStackTrace();
+				}
+			});
 			
 			root2.setTop(grid2);
 			
 			WebView webview = new WebView();
 			webview.getEngine().load(
-				"https://www.youtube.com/embed/7yDmGnA8Hw0"
+				//"https://www.youtube.com/embed/7yDmGnA8Hw0"
+				videoID
 			);
 			webview.setPrefSize(480, 360);
 			
@@ -129,14 +165,44 @@ public class GUI extends Application {
 		}
 	}
 	
-	public void ButtonClicked(ActionEvent e)
+	public void createSearchAndYoutube(){
+		try {
+			search = new Lucene_Search();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		yt = new YoutubeAPICaller();
+	}
+	
+	public void handle(KeyEvent keyEvent) {
+		if (keyEvent.getCode() == KeyCode.ENTER)  {
+			btn1.fire();
+			searchBar.setText("");
+		}
+	}
+	
+	public void ButtonClicked(ActionEvent e) throws IOException, ParseException
 	{
 		if (e.getSource() == btn1){
+			//createSearchAndYoutube();
+			search = new Lucene_Search();
+			yt = new YoutubeAPICaller();
+			//container.clear();
 			lyrics = searchBar.getText();
-//			System.out.println(lyrics);
-//			Lucene_Search search = new Lucene_Search();
-//			HashMap<Integer, Song> results = search.search(lyrics);
-//			results.get(1).getLyrics();
+			//System.out.println(lyrics);
+			
+			container = search.search(lyrics);
+			songTitle.setText(container.get(0).getTitle()) ;
+			artistTitle.setText(container.get(0).getArtist());
+			albumTitle.setText(container.get(0).getAlbum());
+			
+			try {
+				videoID = yt.getYoutubeID(container.get(2).getTitle());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			} 
+			System.out.println(videoID);
+			
 			thestage.setScene(scene2);
 		}
 		else

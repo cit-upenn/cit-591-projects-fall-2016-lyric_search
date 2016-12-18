@@ -22,11 +22,10 @@ public class YoutubeAPICaller {
 		for(String element : ID.keySet()){
 			if(element.toLowerCase().contains(songTitle)){
 				videoId = ID.get(element);
-				System.out.println("test");
+				System.out.println(videoId);
 				break;
 			}
 		}
-		//System.out.println(videoId);
 		videoLink = YoutubeURL + videoId;
 		return videoLink;
 	}
