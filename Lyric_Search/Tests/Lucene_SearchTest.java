@@ -8,13 +8,14 @@ public class Lucene_SearchTest {
 
 	@Test
 	public void test() {
+		Lucene_Search search = null;
 		try {
-			Lucene_Search search = new Lucene_Search();
+			search = new Lucene_Search();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		search.search(userQuery)
 	}
 
 }

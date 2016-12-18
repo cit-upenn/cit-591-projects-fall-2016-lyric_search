@@ -19,6 +19,7 @@ public class FileReader {
 		importFile();
 	}
 	
+	
 	/**
 	 * Takes each line of the file and add each line to the ArrayList of lines.
 	 */
