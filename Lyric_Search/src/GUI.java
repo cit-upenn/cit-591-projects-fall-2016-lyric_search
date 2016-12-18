@@ -38,7 +38,10 @@ public class GUI extends Application {
 	private Text albumTitle;
 	private Lucene_Search search;
 	private YoutubeAPICaller yt;
-	private String videoID;
+	private String videoEmbedLink;
+	private WebView webview;
+	private Text error;
+	private GridPane grid;
 	
 	
 	@Override
@@ -47,7 +50,7 @@ public class GUI extends Application {
 			thestage = primaryStage;
 			BorderPane root = new BorderPane();
 			
-			GridPane grid = new GridPane();
+			grid = new GridPane();
 			grid.setAlignment(Pos.CENTER);
 			grid.setHgap(10);
 			grid.setVgap(10);
@@ -66,6 +69,9 @@ public class GUI extends Application {
 			searchBar = new TextField();
 			grid.add(searchBar, 1, 2, 6, 1);
 			
+			error = new Text("");
+			grid.add(error, 1, 3);
+			
 			btn1 = new Button("Search");
 			HBox hbBtn = new HBox(10);
 			hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
@@ -76,8 +82,6 @@ public class GUI extends Application {
 				try {
 					ButtonClicked(e);
 				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
 			});
@@ -136,18 +140,15 @@ public class GUI extends Application {
 			btn2.setOnAction(e-> {
 				try {
 					ButtonClicked(e);
-				} catch (IOException | ParseException e1) {
+				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			});
 			
 			root2.setTop(grid2);
 			
-			WebView webview = new WebView();
-			webview.getEngine().load(
-				//"https://www.youtube.com/embed/7yDmGnA8Hw0"
-				videoID
-			);
+			webview = new WebView();
+
 			webview.setPrefSize(480, 360);
 			
 			
@@ -163,15 +164,6 @@ public class GUI extends Application {
 		}
 	}
 	
-	public void createSearchAndYoutube(){
-		try {
-			search = new Lucene_Search();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		yt = new YoutubeAPICaller();
-	}
-	
 	public void handle(KeyEvent keyEvent) {
 		if (keyEvent.getCode() == KeyCode.ENTER)  {
 			btn1.fire();
@@ -179,32 +171,52 @@ public class GUI extends Application {
 		}
 	}
 	
-	public void ButtonClicked(ActionEvent e) throws IOException, ParseException
+	public void ButtonClicked(ActionEvent e) throws IOException
 	{
 		if (e.getSource() == btn1){
-			//createSearchAndYoutube();
+			
 			search = new Lucene_Search();
 			yt = new YoutubeAPICaller();
-			//container.clear();
 			lyrics = searchBar.getText();
-			//System.out.println(lyrics);
-			
-			container = search.search(lyrics);
-			songTitle.setText(container.get(0).getTitle()) ;
-			artistTitle.setText(container.get(0).getArtist());
-			albumTitle.setText(container.get(0).getAlbum());
 			
 			try {
-				videoID = yt.getYoutubeID(container.get(4).getTitle());
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			} 
-			System.out.println(videoID);
+				container = search.search(lyrics);
+			} catch (ParseException e2) {
+				error.setText("No search entered");
+				System.out.println("No search entered");
+				return;
+			}
 			
-			thestage.setScene(scene2);
+			
+			
+			if(!container.isEmpty()){
+				songTitle.setText(container.get(0).getTitle()) ;
+				artistTitle.setText(container.get(0).getArtist());
+				albumTitle.setText(container.get(0).getAlbum());
+				
+				try {
+					videoEmbedLink = yt.getYoutubeID(container.get(0).getTitle(), container.get(0).getArtist());
+				} catch (Exception e1) {
+					System.out.println("No youtube link found");
+				} 
+				
+				webview.getEngine().load( 
+						videoEmbedLink
+					);
+				
+				thestage.setScene(scene2);
+			}
+			else{
+				error.setText("Search Not Found");
+			}
+			
+			
+			
 		}
-		else
+		else{
+			error.setText("");
 			thestage.setScene(scene1);
+		}
 	}
 	
 	
