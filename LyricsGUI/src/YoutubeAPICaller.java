@@ -11,7 +11,8 @@ import org.json.JSONObject;
 public class YoutubeAPICaller {
 	private final static String API_BASE = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
 	private final static String MY_KEY = "AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
-	private final static String YoutubeURL = "https://www.youtube.com/watch?v=";
+//	private final static String YoutubeURL = "https://www.youtube.com/watch?v=";
+	private final static String YoutubeURL = "https://www.youtube.com/embed?v=";
 	private String videoLink;
 
 	public String getYoutubeID (String songTitle) throws Exception{
