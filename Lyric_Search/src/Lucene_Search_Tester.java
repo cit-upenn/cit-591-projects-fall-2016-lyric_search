@@ -16,7 +16,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
-public class Lucene_Search_main {
+public class Lucene_Search_Tester {
 
 	public static void main(String[] args) throws IOException, ParseException, org.apache.lucene.queryparser.classic.ParseException {
 		StandardAnalyzer analyzer = new StandardAnalyzer();
