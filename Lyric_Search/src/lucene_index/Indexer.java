@@ -23,10 +23,10 @@ import org.apache.lucene.store.FSDirectory;
 public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
 //		FileReader file = new FileReader("song_list.txt");
-		FileReader file = new FileReader("demo_lyrics_10k.txt");
+//		FileReader file = new FileReader("demo_lyrics_10k.txt");
 //		FileReader file = new FileReader("lyrics.txt");
 //		FileReader file = new FileReader("lyrics10000new.txt");
-//		FileReader file = new FileReader("lyrics462.txt");		
+		FileReader file = new FileReader("lyrics462.txt");		
 		
 		
 		SongData songData = new SongData(file);
@@ -37,18 +37,18 @@ public class Indexer {
 		Path docDir = Paths.get("Song_Index"); 
 		Directory directory = FSDirectory.open(docDir);
 		File dir = new File("Song_Index");
-		// deletes all files in the directory so each indexing is a fresh start
-		for(File files: dir .listFiles()) { 
-		    if (!files.isDirectory()) 
-		        files.delete();
-		}
+//		// deletes all files in the directory so each indexing is a fresh start
+//		for(File files: dir .listFiles()) { 
+//		    if (!files.isDirectory()) 
+//		        files.delete();
+//		}
 //		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();
 		IndexWriter indexWriter = new IndexWriter(directory, config);
 		// makes sure the index has no docs before creating a new index
 		// prevents duplicates in index
-		indexWriter.deleteAll();
-		indexWriter.commit();
+//		indexWriter.deleteAll();
+//		indexWriter.commit();
 		
 		// loop through song data to create the docs
 		System.out.println("indexing...");
