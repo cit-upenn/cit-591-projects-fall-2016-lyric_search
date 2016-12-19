@@ -5,7 +5,11 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+<<<<<<< HEAD
 			<item value="/home/jon/Development/EclipseWorkspace/HomeworkSix/cit-591-projects-fall-2016-lyric_search"/>
+=======
+			<item value="D:\Users\Saurav\workspace\Homework6\cit-591-projects-fall-2016-lyric_search"/>
+>>>>>>> f9a0da811b11cf4f55d7896048032f25eb902dcd
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
