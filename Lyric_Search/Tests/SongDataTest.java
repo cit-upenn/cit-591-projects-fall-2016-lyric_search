@@ -21,6 +21,7 @@ public class SongDataTest {
 	public void testMapsGetCorrectValue() {
 		SongData song = new SongData(file);
 		int size = file.getFile().size();
+		System.out.println(size);
 		assertEquals("The first artist should be Cam'ron","Cam'ron", song.getArtist(0));
 		assertEquals("The first song song title should be Killa Cam", "Killa Cam", song.getTitle(0));
 		assertEquals("The first album should be Purple Haze", "Purple Haze", song.getAlbum(0));

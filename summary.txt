@@ -1,3 +1,6 @@
+https://github.com/cit-upenn/cit-591-projects-fall-2016-lyric_search
+
+
 NOTE: files needed to run the project are all in the Lyric_Search folder.  All miscellaneous files are located outside this folder.
 
 This project consisted of three main requirements: 1) building a database of lyrics, 2) indexing and searching the database using a specified sample of lyrics, and 3) creating a GUI to ask for user input and display the search results.  Sameer handled the first task, Jon handled the second task, and Saurav handled the third task.
@@ -38,4 +41,5 @@ Task 3: GUI, YouTubeAPICaller
 - Class that allows for the searching logic
 - opens the directory storing the index created from the indexer class.
 - Uses an analyzer that performs the analysis algorithm on the query to generate search results.
+
 
