@@ -33,7 +33,8 @@ public class Lucene_SearchTest {
 	@Test
 	public void testSearch() throws ParseException, IOException {
 		HashMap<Integer, Song> results = search.search("invite me");
-		assertNotNull("results is not empty", results);
+		assertEquals("The artist should be Jay Z", "Jay Z", results.get(0).getArtist());
+		assertEquals("The song title should be Can I Live", "Can I Live", results.get(0).getTitle());
 	}
 	
 	@Test 
@@ -43,5 +44,4 @@ public class Lucene_SearchTest {
 //		assertExpected()
 		assertEquals("results should be null", results);
 	}
-
 }
