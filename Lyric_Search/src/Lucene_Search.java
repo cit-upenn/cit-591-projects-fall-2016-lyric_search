@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -36,7 +37,9 @@ public class Lucene_Search {
 	 * @throws IOException
 	 */
 	public Lucene_Search() throws IOException {
-		analyzer = new StandardAnalyzer();
+		CharArraySet stopList = new CharArraySet(0, true);
+		// create a StandardAnalyzer with an empty stoplist. Don't want to filter any words.
+		analyzer = new StandardAnalyzer(stopList);
 		docDir = Paths.get("Song_Index");
 		directory = FSDirectory.open(docDir);
 		reader = DirectoryReader.open(directory);

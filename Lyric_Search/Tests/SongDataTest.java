@@ -9,31 +9,35 @@ import lucene_index.SongData;
 public class SongDataTest {
 
 	private FileReader file;
-	private SongData song; 
+	
 	
 	@Before 
 	public void setup() {
 		file = new FileReader("lyrics.txt");
 	}
 	
-	@Test
-	public void testConstructor() {
-		SongData testSong = new SongData(file);
-		
-	}
 	
 	@Test
-	public void testGenerateData() {
-		song = new SongData(file);
+	public void testMapsGetCorrectValue() {
+		SongData song = new SongData(file);
+		int size = file.getFile().size();
 		assertEquals("The first artist should be Cam'ron","Cam'ron", song.getArtist(0));
 		assertEquals("The first song song title should be Killa Cam", "Killa Cam", song.getTitle(0));
 		assertEquals("The first album should be Purple Haze", "Purple Haze", song.getAlbum(0));
 		assertNotNull("The first lyrics should not be null", song.getLyrics(0));
 		
-		assertEquals("The last artist should be Cam'ron","Cam'ron", song.getArtist(0));
-		assertEquals("The last song song title should be Rockin' and Rollin'", "Rockin' and Rollin'", song.getTitle(0));
-		assertEquals("The last album should be Confessions of Fire", "Confessions of Fire", song.getAlbum(0));
-		assertNotNull("The last lyrics should not be null", song.getLyrics(18));
+		assertEquals("The last artist should be Cam'ron","Cam'ron", song.getArtist(size - 2));
+		assertEquals("The last song song title should be Rockin' and Rollin'", "Rockin' and Rollin'", song.getTitle(size - 2));
+		assertEquals("The last album should be Confessions of Fire", "Confessions of Fire", song.getAlbum(size - 2));
+		assertNotNull("The last lyrics should not be null", song.getLyrics(size - 2));
 	}
-
+	
+	@Test
+	public void testMapsAreNotEmpty() {
+		SongData song = new SongData(file);
+		assertNotNull("The artist map should not be null", song.getArtistMap());
+		assertNotNull("The album map should not be null", song.getAlbumMap());
+		assertNotNull("The song title map should not be null", song.getTitleMap());
+		assertNotNull("The lyrics map should not be null", song.getLyricsMap());
+	}
 }

@@ -12,6 +12,7 @@ public class YoutubeAPICaller {
 	private final static String API_BASE = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
 	private final static String MY_KEY = "AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
 	private final static String YoutubeURL = "https://www.youtube.com/embed/";
+//	private final static String YoutubeURL = "http://www.youtube.com/embed/";
 	private String videoLink;
 
 	public String getYoutubeID (String songTitle, String songArtist) throws Exception{
@@ -32,7 +33,6 @@ public class YoutubeAPICaller {
 
 	public String buildUrl(String title) {
 		String searchTermNoSpaces = title.replaceAll(" ", "\\+");
-		System.out.println(searchTermNoSpaces);
 		StringBuilder url = new StringBuilder(API_BASE + searchTermNoSpaces + "&type=video&key=" + MY_KEY);
 		return url.toString();
 	}
