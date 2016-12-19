@@ -1,0 +1,58 @@
+https://github.com/cit-upenn/cit-591-projects-fall-2016-lyric_search
+
+
+NOTE: files needed to run the project are all in the Lyric_Search folder.  All miscellaneous files are located outside this folder.
+
+This project consisted of three main requirements: 1) building a database of lyrics, 2) indexing and searching the database using a specified sample of lyrics, and 3) creating a GUI to ask for user input and display the search results.  Sameer handled the first task, Jon handled the second task, and Saurav handled the third task.
+
+Task 1: Lyrics (and also JSoupTester, but this is not used -- see description below)
+Task 2: Index, FileReader, SongData, Song, Lucene 
+Task 3: GUI, YouTubeAPICaller
+
+===================Lyrics=======================
+- Initial plan was to scrape AZLyrics.com using JSoup.  A program was created to scrape AZLyrics one song at a time (JSoupTester), but we were eventually blocked from the website for accessing it too often. 
+-  Due to this unforeseen hurdle, we decided to use the Genius API, combined with JSoup and JSon, to build our database (Lyrics.java file).
+- Decided to get 1,000 songs from the Genius website, but the program permits as many songs to be scraped as possible (change the range in line 186).
+- Larger data files are attached for reference (example: lyrics10000new.txt)
+- Note: since JSoupTester.java was not used, it was not tested or properly commented.
+
+===================Index=======================
+- Uses FileReader and Songdata in order to index the songs.
+- Opens a directory in order to store the index at the location.
+- Index is created as a series of docs. Each doc is a song with it's associated information
+- Each doc has fields for title, album, artist, and lyrics that are searchable. 
+
+==================FileReader==================
+- Parses the text file of songs to generate an arraylist, where each element is a line. 
+
+=====================SongData==================
+- A class that stores the song data. 
+- The lines of the text file are organized as such:
+	- artist|album|title|lyrics
+- creates HashMaps to store each attribute by splitting based on the "|"
+- has getters to access each hashmap of the song attribute. 
+
+=====================Song============================
+- A container class that stores the attributes of a song such as artist, title, album, and lyrics. 
+- allows for passing around the container rather than strings. 
+- Has accessor methods. 
+
+====================Lucene_Search======================
+- Class that allows for the searching logic
+- opens the directory storing the index created from the indexer class.
+- Uses an analyzer that performs the analysis algorithm on the query to generate search results.
+
+
+
+
+
+
+
+
+
+
+
+
+
+===========================EXTRA CREDIT====================================
+58.2% coverage

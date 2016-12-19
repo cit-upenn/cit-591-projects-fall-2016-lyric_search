@@ -30,7 +30,7 @@ public class YoutubeAPICallerTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("Response length should be 4993", 4993, response.length());
+		assertEquals("Response length should be 4994", 4994, response.length());
 		
 	}
 	
