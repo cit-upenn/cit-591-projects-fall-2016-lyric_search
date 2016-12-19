@@ -7,6 +7,7 @@ import java.text.ParseException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -36,18 +37,18 @@ public class Indexer {
 		Path docDir = Paths.get("Song_Index"); 
 		Directory directory = FSDirectory.open(docDir);
 		File dir = new File("Song_Index");
-		// deletes all files in the directory so each indexing is a fresh start
-		for(File files: dir .listFiles()) { 
-		    if (!files.isDirectory()) 
-		        files.delete();
-		}
+//		// deletes all files in the directory so each indexing is a fresh start
+//		for(File files: dir .listFiles()) { 
+//		    if (!files.isDirectory()) 
+//		        files.delete();
+//		}
 //		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();
 		IndexWriter indexWriter = new IndexWriter(directory, config);
 		// makes sure the index has no docs before creating a new index
 		// prevents duplicates in index
-		indexWriter.deleteAll();
-		indexWriter.commit();
+//		indexWriter.deleteAll();
+//		indexWriter.commit();
 		
 		// loop through song data to create the docs
 		System.out.println("indexing...");
@@ -62,6 +63,7 @@ public class Indexer {
 			doc.add(new TextField("album", album, Field.Store.YES));
 			doc.add(new TextField("artist", artist, Field.Store.YES));
 			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
+			
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
