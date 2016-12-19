@@ -54,6 +54,7 @@ public class YoutubeAPICaller {
 			response.append(inputLine);
 		}
 		in.close();
+		System.out.println(response.toString().length());
 
 		return response.toString();
 	}
