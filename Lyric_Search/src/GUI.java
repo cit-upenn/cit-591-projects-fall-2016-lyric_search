@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 /**
  * This class executes the GUI for Lyrics Search Program. 
  * It consists of two scenes, one where the user enters lyrics to search for and the second
- * displays the information of the search return.
+ * displays the information of the search result.
  * @author Saurav
  *
  */
@@ -51,17 +51,22 @@ public class GUI extends Application {
 	
 	
 	@Override
+	/**
+	 * Creates the stage (essentially the template of the GUI)
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			thestage = primaryStage;
 			BorderPane root = new BorderPane();
 			
+			//Creates a grid, which will contain the components of first scene (section) of GUI 
 			grid = new GridPane();
 			grid.setAlignment(Pos.CENTER);
 			grid.setHgap(10);
 			grid.setVgap(10);
 			grid.setPadding(new Insets(25, 25, 25, 25));
 			
+			//Adds title of program
 			Text sceneTitle = new Text("Lyric Search");
 			sceneTitle.setId("title-text");
 			sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
@@ -69,21 +74,26 @@ public class GUI extends Application {
 			
 //			grid.setGridLinesVisible(true);
 			
+			//Adds label of search bar
 			Label search = new Label("Enter Lyrics:");
 			grid.add(search, 0, 2);
 
+			//Adds search bar to enter text into
 			searchBar = new TextField();
 			grid.add(searchBar, 1, 2, 6, 1);
 			
+			//Adds text field which will be used to display error messages
 			error = new Text("");
 			grid.add(error, 1, 3);
 			
+			//Adds search button
 			btn1 = new Button("Search");
 			HBox hbBtn = new HBox(10);
 			hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 			hbBtn.getChildren().add(btn1);
 			grid.add(hbBtn, 6, 3);
 			
+			//Adds functionality to search button
 			btn1.setOnAction(e-> {
 				try {
 					ButtonClicked(e);
@@ -92,9 +102,12 @@ public class GUI extends Application {
 				}
 			});
 			
+			//Creates event that registers keyboard input
 			searchBar.setOnKeyPressed(keyEvent -> handle(keyEvent));
 			
+			//Adds grid to BorderPane
 			root.setTop(grid);
+			
 			
 			scene1 = new Scene(root,650,600);
 			scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -154,9 +167,7 @@ public class GUI extends Application {
 			root2.setTop(grid2);
 			
 			webview = new WebView();
-
 			webview.setPrefSize(480, 360);
-			
 			
 			root2.setBottom(webview);
 			
