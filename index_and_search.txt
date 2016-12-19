@@ -1,0 +1,4 @@
+===================Index=======================
+
+- combines FileReader and Songdata in order to index the songs.
+- 
