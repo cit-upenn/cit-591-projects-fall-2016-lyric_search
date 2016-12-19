@@ -33,7 +33,6 @@ public class YoutubeAPICaller {
 	public String buildUrl(String title) {
 		String searchTermNoSpaces = title.replaceAll(" ", "\\+");
 		StringBuilder url = new StringBuilder(API_BASE + searchTermNoSpaces + "&type=video&key=" + MY_KEY);
-		System.out.println(url.toString().length());
 		return url.toString();
 	}
 
@@ -54,7 +53,6 @@ public class YoutubeAPICaller {
 			response.append(inputLine);
 		}
 		in.close();
-		System.out.println(response.toString().length());
 
 		return response.toString();
 	}
