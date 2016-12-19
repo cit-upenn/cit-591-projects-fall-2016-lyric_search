@@ -23,7 +23,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
+/**
+ * This class executes the GUI for Lyrics Search Program. 
+ * It consists of two scenes, one where the user enters lyrics to search for and the second
+ * displays the information of the search return.
+ * @author Saurav
+ *
+ */
 public class GUI extends Application {
 	private Stage thestage;
 	private Scene scene1; 
