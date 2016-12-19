@@ -21,10 +21,8 @@ public class SongData {
 		album = new HashMap<>();
 		title = new HashMap<>();
 		lyrics = new HashMap<>();
-		System.out.println("lines in file: " + file.getFile().size());
 		generateData(file);
-		System.out.println("lines in file: " + file.getFile().size());
-		System.out.println("artist hashmap size: " + artist.size());
+		
 	}
 
 	/**
@@ -43,13 +41,6 @@ public class SongData {
 				album.put(i, temp[1].trim());
 				title.put(i, temp[2].trim());
 				lyrics.put(i, temp[3].trim());
-//				marker = i;
-//			} else if (!file.getFile().get(i).contains("**")) {
-//				if (file.getFile().get(i).equals("")) {
-//					lyrics.put(marker, lyrics.get(marker) + "\n");
-//				} else {
-//					lyrics.put(marker, lyrics.get(marker) + (file.getFile().get(i)) + "\n");
-//				}
 			}
 		}
 	}
@@ -88,7 +79,6 @@ public class SongData {
 	public String getLyrics(int key) {
 		return lyrics.get(key);
 	}
-
 	
 	/**
 	 * Gets the keyset to titles.

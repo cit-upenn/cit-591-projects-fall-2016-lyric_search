@@ -43,3 +43,16 @@ Task 3: GUI, YouTubeAPICaller
 - Uses an analyzer that performs the analysis algorithm on the query to generate search results.
 
 
+
+
+
+
+
+
+
+
+
+
+
+===========================EXTRA CREDIT====================================
+58.2% coverage

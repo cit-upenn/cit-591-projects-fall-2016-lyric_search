@@ -35,7 +35,6 @@ public class Indexer {
 		    if (!files.isDirectory()) 
 		        files.delete();
 		}
-//		Directory directory = new RAMDirectory();
 		IndexWriterConfig config = new IndexWriterConfig();
 		IndexWriter indexWriter = new IndexWriter(directory, config);
 		// makes sure the index has no docs before creating a new index
