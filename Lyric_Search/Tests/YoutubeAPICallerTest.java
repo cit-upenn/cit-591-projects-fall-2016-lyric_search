@@ -11,16 +11,14 @@ public class YoutubeAPICallerTest {
 	
 	@Before
 	public void setup(){
-		yt = new YoutubeAPICaller();
-		
-		
+		yt = new YoutubeAPICaller();	
 	}
 	
 	@Test
 	public void buildUrltest() {
 		String artistAndSong = "Jay Z Can I Live";
 		String URL = yt.buildUrl(artistAndSong);		
-		assertEquals("URL Length should be 131", 131, URL.length());
+		assertEquals("URL length should be 131", 131, URL.length());
 	}
 	
 	@Test
@@ -32,7 +30,7 @@ public class YoutubeAPICallerTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("Response Length should be 4790", 4790, response.length());
+		assertEquals("Response length should be 4790", 4790, response.length());
 		
 	}
 	
@@ -49,5 +47,21 @@ public class YoutubeAPICallerTest {
 		assertNotNull("SearchResults should not be empty", searchResults);
 		
 	}
+	
+	@Test
+	public void getYoutubeIDtest() {
+		String artist = "Jay Z";
+		String song = "Can I live";
+		String videoLink = "";
+		try {
+			videoLink = yt.getYoutubeID(song, artist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals("VideoLink length should be 41", 41, videoLink.length());
+		
+	}
+	
+	
 
 }

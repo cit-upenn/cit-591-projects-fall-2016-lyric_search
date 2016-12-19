@@ -40,8 +40,8 @@ public class Lucene_Search_Tester {
 			}
 			// create query
 			// can use~ after each term for fuzzy search
-			String querystr = input;
-//			String querystr = args.length > 0 ? args[0] : input;
+//			String querystr = input;
+			String querystr = args.length > 0 ? args[0] : input;
 			
 			System.out.println(querystr);
 			
