@@ -25,6 +25,8 @@ public class Indexer {
 //		FileReader file = new FileReader("demo_lyrics_10k.txt");
 		FileReader file = new FileReader("lyrics.txt");
 //		FileReader file = new FileReader("lyrics10000new.txt");
+//		FileReader file = new FileReader("lyrics1000.txt");		
+		
 		
 		SongData songData = new SongData(file);
 //		StandardAnalyzer analyzer = new StandardAnalyzer();
@@ -59,7 +61,7 @@ public class Indexer {
 			doc.add(new TextField("title", title, Field.Store.YES));
 			doc.add(new TextField("album", album, Field.Store.YES));
 			doc.add(new TextField("artist", artist, Field.Store.YES));
-			doc.add(new TextField("lyrics", lyrics, Field.Store.YES));
+			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
