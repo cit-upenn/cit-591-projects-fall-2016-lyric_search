@@ -168,7 +168,7 @@ public class GUI extends Application {
 		if (keyEvent.getCode() == KeyCode.ENTER)  {
 			btn1.fire();
 			searchBar.setText("");
-		}
+		}		
 	}
 	
 	public void ButtonClicked(ActionEvent e) throws IOException
@@ -209,7 +209,6 @@ public class GUI extends Application {
 			else{
 				error.setText("Search Not Found");
 			}
-			
 			
 			
 		}
