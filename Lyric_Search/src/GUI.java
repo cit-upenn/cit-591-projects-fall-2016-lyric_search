@@ -27,7 +27,7 @@ import javafx.stage.Stage;
  * This class executes the GUI for Lyrics Search Program. 
  * It consists of two scenes, one where the user enters lyrics to search for and the second
  * displays the information of the search result.
- * @author Saurav
+ * @author Saurav, Sameer, Jon
  *
  */
 public class GUI extends Application {
@@ -108,17 +108,21 @@ public class GUI extends Application {
 			//Adds grid to BorderPane
 			root.setTop(grid);
 			
-			
+			//Creates scene with BorderPane
 			scene1 = new Scene(root,650,600);
 			scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
+			
 			BorderPane root2 = new BorderPane();
+			
+			//Creates a grid, which will contain the components of second scene (section) of GUI 
 			GridPane grid2 = new GridPane();
 			grid2.setAlignment(Pos.CENTER);
 			grid2.setHgap(10);
 			grid2.setVgap(10);
 			grid2.setPadding(new Insets(25, 25, 25, 25));
 			
+			//Adds title of program
 			Text sceneTitle2 = new Text("Lyric Search");
 			sceneTitle2.setId("title-text");
 			sceneTitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
@@ -126,36 +130,44 @@ public class GUI extends Application {
 			
 //			grid2.setGridLinesVisible(true);
 			
+			//Adds label of song text field
 			Label song = new Label("Song:");
 			grid2.add(song, 0, 2);
 			
+			//Adds text of song title search result
 			songTitle = new Text("");
 			grid2.add(songTitle, 1, 2);
 			songTitle.setId("result-text");
 //			songTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			
+			//Adds label of artist text field
 			Label artist = new Label("Artist:");
 			grid2.add(artist, 0, 3);
 			
+			//Adds text of song artist search result
 			artistTitle = new Text("");
 			grid2.add(artistTitle, 1, 3);
 			artistTitle.setId("result-text");
 //			artistTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			
+			//Adds label of album text field
 			Label album = new Label("Album:");
 			grid2.add(album, 0, 4);
 			
+			//Adds text of song album search result
 			albumTitle = new Text("");
 			grid2.add(albumTitle, 1, 4);
 			albumTitle.setId("result-text");
 //			albumTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
 			
+			//Adds return button
 			btn2 = new Button("Return");
 			HBox hbBtn2 = new HBox(10);
 			hbBtn2.setAlignment(Pos.BOTTOM_RIGHT);
 			hbBtn2.getChildren().add(btn2);
 			grid2.add(hbBtn2, 6, 5);
 			
+			//Adds functionality to return button
 			btn2.setOnAction(e-> {
 				try {
 					ButtonClicked(e);
@@ -164,16 +176,21 @@ public class GUI extends Application {
 				}
 			});
 			
+			//Adds grid2 to second BorderPane
 			root2.setTop(grid2);
 			
+			//Adds webview which is used to play youtube videos
 			webview = new WebView();
 			webview.setPrefSize(480, 360);
 			
+			//Adds webview to second BorderPane
 			root2.setBottom(webview);
 			
+			//Creates scene with second BorderPane
 			scene2 = new Scene(root2,650,600);
 			scene2.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
+			//Initiates stage with first scene
 			primaryStage.setScene(scene1);
 			primaryStage.show();
 		} catch(Exception e) {
@@ -181,6 +198,10 @@ public class GUI extends Application {
 		}
 	}
 	
+	/**
+	 * This method allows search to be initiated with enter key as well as button click
+	 * @param keyEvent Event representing keyboard key press, specifically ENTER key
+	 */
 	public void handle(KeyEvent keyEvent) {
 		if (keyEvent.getCode() == KeyCode.ENTER)  {
 			btn1.fire();
@@ -188,6 +209,13 @@ public class GUI extends Application {
 		}		
 	}
 	
+	/**
+	 * This method initiates search process once button is clicked. Search is conducted using 
+	 * Lucene Search and results are displayed in transitioned scene.
+	 * Error message printed if no search entered or no search results found.
+	 * @param e Action on button 1
+	 * @throws IOException
+	 */
 	public void ButtonClicked(ActionEvent e) throws IOException
 	{
 		if (e.getSource() == btn1){
@@ -203,8 +231,6 @@ public class GUI extends Application {
 				System.out.println("No search entered");
 				return;
 			}
-			
-			
 			
 			if(!container.isEmpty()){
 				songTitle.setText(container.get(0).getTitle()) ;
@@ -226,8 +252,7 @@ public class GUI extends Application {
 			else{
 				error.setText("Search Not Found");
 			}
-			
-			
+		
 		}
 		else{
 			error.setText("");
@@ -235,7 +260,12 @@ public class GUI extends Application {
 		}
 	}
 	
-	
+	/**
+	 * Main that runs entire GUI
+	 * @param args
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void main(String[] args) throws IOException, ParseException {
 		launch(args);
 	}

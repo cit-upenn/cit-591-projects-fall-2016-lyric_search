@@ -16,27 +16,27 @@ public class YoutubeAPICallerTest {
 	
 	@Test
 	public void buildUrltest() {
-		String artistAndSong = "Jay Z Can I Live";
+		String artistAndSong = "Eminem Lose Yourself";
 		String URL = yt.buildUrl(artistAndSong);		
-		assertEquals("URL length should be 131", 131, URL.length());
+		assertEquals("URL length should be 135", 135, URL.length());
 	}
 	
 	@Test
 	public void doApiCalltest() {
-		String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Jay+Z+Can+I+Live&type=video&key=AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
+		String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Eminem+Lose+Yourself&type=video&key=AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
 		String response = "";
 		try {
 			response = yt.doApiCall(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		assertEquals("Response length should be 4790", 4790, response.length());
+		assertEquals("Response length should be 4993", 4993, response.length());
 		
 	}
 	
 	@Test
 	public void extractIdsFromResponsetest() {
-		String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Jay+Z+Can+I+Live&type=video&key=AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
+		String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Eminem+Lose+Yourself&type=video&key=AIzaSyDvolSDCsRWRnKmxPU3WujTXhAJHjoP0lE";
 		String response = "";
 		try {
 			response = yt.doApiCall(url);
@@ -50,8 +50,8 @@ public class YoutubeAPICallerTest {
 	
 	@Test
 	public void getYoutubeIDtest() {
-		String artist = "Jay Z";
-		String song = "Can I live";
+		String artist = "Eminem";
+		String song = "Lose Yourself";
 		String videoLink = "";
 		try {
 			videoLink = yt.getYoutubeID(song, artist);
