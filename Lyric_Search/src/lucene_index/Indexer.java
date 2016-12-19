@@ -7,6 +7,7 @@ import java.text.ParseException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -22,10 +23,10 @@ import org.apache.lucene.store.FSDirectory;
 public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
 //		FileReader file = new FileReader("song_list.txt");
-//		FileReader file = new FileReader("demo_lyrics_10k.txt");
+		FileReader file = new FileReader("demo_lyrics_10k.txt");
 //		FileReader file = new FileReader("lyrics.txt");
 //		FileReader file = new FileReader("lyrics10000new.txt");
-		FileReader file = new FileReader("lyrics462.txt");		
+//		FileReader file = new FileReader("lyrics462.txt");		
 		
 		
 		SongData songData = new SongData(file);
@@ -62,6 +63,7 @@ public class Indexer {
 			doc.add(new TextField("album", album, Field.Store.YES));
 			doc.add(new TextField("artist", artist, Field.Store.YES));
 			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
+			
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
