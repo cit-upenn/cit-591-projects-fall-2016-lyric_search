@@ -21,20 +21,16 @@ import org.apache.lucene.store.FSDirectory;
  */
 public class Indexer {
 	public static void main(String[] args) throws IOException, ParseException {
-//		FileReader file = new FileReader("song_list.txt");
-//		FileReader file = new FileReader("demo_lyrics_10k.txt");
 		FileReader file = new FileReader("lyrics.txt");
-//		FileReader file = new FileReader("lyrics10000new.txt");
 		
 		SongData songData = new SongData(file);
-//		StandardAnalyzer analyzer = new StandardAnalyzer();
 /*
  * choose to make index in ram or store in a directory
  */
 		Path docDir = Paths.get("Song_Index"); 
 		Directory directory = FSDirectory.open(docDir);
 		File dir = new File("Song_Index");
-		// deletes all files in the directory so each indexing is a fresh start
+//		// deletes all files in the directory so each indexing is a fresh start
 		for(File files: dir .listFiles()) { 
 		    if (!files.isDirectory()) 
 		        files.delete();
@@ -59,12 +55,11 @@ public class Indexer {
 			doc.add(new TextField("title", title, Field.Store.YES));
 			doc.add(new TextField("album", album, Field.Store.YES));
 			doc.add(new TextField("artist", artist, Field.Store.YES));
-			doc.add(new TextField("lyrics", lyrics, Field.Store.YES));
+			doc.add(new TextField("lyrics", lyrics, Field.Store.NO));
+			
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
-		System.out.println(indexWriter.numDocs());
-		
 		indexWriter.close();
 		System.out.println("Indexing Complete!");
 	}
