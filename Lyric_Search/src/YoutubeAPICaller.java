@@ -32,8 +32,8 @@ public class YoutubeAPICaller {
 
 	public String buildUrl(String title) {
 		String searchTermNoSpaces = title.replaceAll(" ", "\\+");
-		System.out.println(searchTermNoSpaces);
 		StringBuilder url = new StringBuilder(API_BASE + searchTermNoSpaces + "&type=video&key=" + MY_KEY);
+		System.out.println(url.toString().length());
 		return url.toString();
 	}
 
