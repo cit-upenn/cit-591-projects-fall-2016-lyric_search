@@ -89,6 +89,7 @@ public class SongData {
 		return lyrics.get(key);
 	}
 
+	
 	/**
 	 * Gets the keyset to titles.
 	 * Helps to determine how many iterations when indexing the files with lucene
@@ -96,5 +97,21 @@ public class SongData {
 	 */
 	public Set<Integer> getKeySet() {
 		return title.keySet();
+	}
+
+	public HashMap<Integer, String> getArtistMap() {
+		return artist;
+	}
+
+	public HashMap<Integer, String> getAlbumMap() {
+		return album;
+	}
+
+	public HashMap<Integer, String> getTitleMap() {
+		return title;
+	}
+
+	public HashMap<Integer, String> getLyricsMap() {
+		return lyrics;
 	}
 }
