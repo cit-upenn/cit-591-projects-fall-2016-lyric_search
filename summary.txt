@@ -46,17 +46,28 @@ Task 3: GUI, YouTubeAPICaller
 - opens the directory storing the index created from the indexer class.
 - Uses an analyzer that performs the analysis algorithm on the query to generate search results.
 
+===================YouTubeAPICaller=====================
+-Class that utilizes Youtube API to search for youtube videos of songs.
+-Creates URL to run API call.
+-Conducts GET request using URL with API key.
+-Parses through search results and creates HashMap containing song titles and video IDs of search results.
+-Goes through HashMap of search results, and creates a youtube link of top search result.
 
-
-
-
-
-
-
-
-
-
+=====================GUI============================
+-Class that creates and executes GUI for Lyrics Search program.
+-Creates window with 2 scenes, one which contains search bar for user to enter lyrics of song into, and the other which 
+returns the information of song found from search.
+-Searches are initiated by entering lyrics of song into searchbar and clicking the search button or hitting enter. 
+If nothing is entered into search bar or no search results are found, error messages are presented.
+-In the 2nd scene which returns top result of search, song name, song artist, song album and a youtube video of song are
+displayed. 
+NOTE: Some videos from major music labels are not able to be played due to webview not having permissions to play them.
+This can be worked around by clicking the play button, then clicking watch on youtube.
 
 
 ===========================EXTRA CREDIT====================================
-58.2% coverage
+For the extra credit, 42.9% coverage was achieved for the Lyric Search program. The reason for this being lower than 
+80% is largely due to the fact that the GUI class could not be properly tested using junit tests. Due to the fact that
+the GUI was largely dependent on user input and button presses, there was no adequate way to run tests on the GUI and 
+determine if the proper visual cues were achieved. If the coverage is viewed for the remainder of the classes excluding
+the GUI, the total coverage is much higher. 
