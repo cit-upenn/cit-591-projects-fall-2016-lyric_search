@@ -7,7 +7,6 @@ import java.text.ParseException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -66,8 +65,6 @@ public class Indexer {
 			// write the document to the index
 			indexWriter.addDocument(doc);
 		}
-		System.out.println(indexWriter.numDocs());
-		
 		indexWriter.close();
 		System.out.println("Indexing Complete!");
 	}
