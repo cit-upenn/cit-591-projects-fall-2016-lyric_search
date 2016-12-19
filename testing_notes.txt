@@ -1,4 +1,0 @@
-FileReader		done.
-SongData		done.
-Indexer			need to work on making into a class instead of a main?
-SongData		done.

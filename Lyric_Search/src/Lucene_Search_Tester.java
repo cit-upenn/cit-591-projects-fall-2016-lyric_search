@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -19,7 +20,10 @@ import org.apache.lucene.store.FSDirectory;
 public class Lucene_Search_Tester {
 
 	public static void main(String[] args) throws IOException, ParseException, org.apache.lucene.queryparser.classic.ParseException {
-		StandardAnalyzer analyzer = new StandardAnalyzer();
+		CharArraySet stopList = new CharArraySet(0, true);
+		// create a StandardAnalyzer with an empty stoplist. Don't want to filter any words.
+		StandardAnalyzer analyzer = new StandardAnalyzer(stopList);
+//		StandardAnalyzer analyzer = new StandardAnalyzer();
 		Scanner in = new Scanner(System.in);
 		boolean loop = true;
 		Path docDir = Paths.get("Song_Index");
@@ -66,7 +70,7 @@ public class Lucene_Search_Tester {
 			for (int i = 0; i < hits.length; ++i) {
 				int docId = hits[i].doc;
 				Document d = searcher.doc(docId);
-				System.out.println((i + 1) + ". " + d.get("artist") + "\t" + d.get("title") + "\t" + d.get("lyrics") + "\n");
+				System.out.println((i + 1) + ". " + d.get("artist") + "\t" + d.get("title") + "\t"  + "\n");
 			}
 			System.out.println();
 		}
